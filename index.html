@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A simple page with an infity scroll of images that are loaded from Unsplash API"
+    />
+    <title>Infinity Scroll</title>
+    <link rel="icon" type="image/png" href="%BASE_URL%favicon.png" />
+
+    <!-- Unsplash API -->
+    <link rel="preconnect" href="https://api.unsplash.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <script>
+      window.__imagesPromise = fetch(
+        'https://api.unsplash.com/photos/random?count=15&client_id=_zITXJQaTmC8p9XuxNrJ1bO4L1aRHNR3E4IrGsYvwfY',
+      ).then((response) => response.json());
+    </script>
+
+    <script type="module" src="/src/main.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <!-- Title -->
+      <h1 class="title">Unsplash API - Infinity Scroll</h1>
+
+      <!-- Loader -->
+      <div class="loader" id="loader">
+        <img src="src/assets/loader.svg" alt="Loading" />
+      </div>
+
+      <!-- IMAGE CONTAINER -->
+      <ul class="image-container-list" id="image-container-list">
+        <li class="image-container" id="image-container"></li>
+      </ul>
+    </main>
+  </body>
+</html>
