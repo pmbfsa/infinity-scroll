@@ -13,5 +13,8 @@ export default defineConfig({
       { assetsSubfolder: 'fonts' },
     ),
   ],
-  build: { emptyOutDir: true },
+  build: {
+    outDir: 'docs',
+    emptyOutDir: true,
+  },
 });
