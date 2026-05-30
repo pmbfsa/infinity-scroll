@@ -93,32 +93,34 @@ function displayPhotos() {
 // Get photos from Unsplash API
 async function getPhotos() {
   try {
+    let response = {};
+
     if (isInitialLoad) {
-      photosArray = await window.__imagesPromise;
+      response = await window.__imagesPromise;
     } else {
-      const response = await fetch(
-        `${apiBaseUrl}?client_id=${apiKey}&count=30`,
-      );
-
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-      photosArray = await response.json();
+      response = await fetch(`${apiBaseUrl}?client_id=${apiKey}&count=30`);
     }
 
-    console.log(photosArray);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    photosArray = await response.json();
 
     displayPhotos();
 
     isInitialLoad = false;
   } catch (error) {
-    alert(error);
+    alert(
+      'Unable to load images. The service may be temporarily unavailable or due to API rate limits.\n' +
+        `Please check back after ${(new Date().getHours() + 1).toString().padStart(2, '0')}:00.`,
+    );
+    console.log(error);
   }
 }
 
 // Event Listeners
 window.addEventListener('scroll', () => {
   if (
-    window.innerHeight + window.scrollY >= document.body.offsetHeight / 2 &&
+    window.innerHeight + window.scrollY >= document.body.offsetHeight - 1000 &&
     ready
   ) {
     ready = false;
