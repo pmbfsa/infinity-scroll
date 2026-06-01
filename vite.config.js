@@ -6,7 +6,8 @@ export default defineConfig({
   base: './',
   plugins: [
     sitemap({
-      hostname: 'http://localhost:4173/',
+      hostname: 'https://pmbfsa.github.io/infinity-scroll/',
+      outDir: 'docs',
     }),
     webfontDownload(
       ['https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap'],

@@ -6,7 +6,7 @@ const imageContainer = document.getElementById('image-container');
 const loader = document.getElementById('loader');
 
 // Unsplash API
-const apiKey = '_zITXJQaTmC8p9XuxNrJ1bO4L1aRHNR3E4IrGsYvwfY';
+const apiKey = import.meta.env.VITE_UNSPLASH_KEY;
 const apiBaseUrl = 'https://api.unsplash.com/photos/random';
 
 // Global Variables
@@ -93,13 +93,9 @@ function displayPhotos() {
 // Get photos from Unsplash API
 async function getPhotos() {
   try {
-    let response = {};
-
-    if (isInitialLoad) {
-      response = await window.__imagesPromise;
-    } else {
-      response = await fetch(`${apiBaseUrl}?client_id=${apiKey}&count=30`);
-    }
+    const response = await fetch(
+      `${apiBaseUrl}?client_id=${apiKey}&count=${isInitialLoad ? 15 : 30}`,
+    );
 
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 

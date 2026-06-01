@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pmbfsa.github.io/infinity-scroll/sitemap.xml
